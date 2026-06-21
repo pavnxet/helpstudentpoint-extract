@@ -71,14 +71,14 @@ def main():
     files = parse_files(text)
     print(f"Found {len(files)} eligible files on server")
 
-    new_files = [f for f in files if f["name"] not in manifest]
-    print(f"New files: {len(new_files)}")
+    download_files = [f for f in files if f["name"] not in manifest or manifest[f["name"]].get("download_error")]
+    print(f"Files to download: {len(download_files)}")
 
-    if not new_files:
+    if not download_files:
         print("Nothing new. Done.")
         return
 
-    for f in new_files:
+    for f in download_files:
         dest = DOWNLOAD_DIR / f["name"]
         print(f"  + {f['name']} ...", end=" ")
         try:
