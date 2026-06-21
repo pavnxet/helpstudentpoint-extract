@@ -37,6 +37,7 @@ async function loadFiles() {
       name,
       url: info.url || (SOURCE_BASE + encodeURIComponent(name)),
       discovered_at: info.discovered_at || info.downloaded_at || '',
+      download_error: info.download_error || '',
       type: getFileType(name),
     }));
 
@@ -104,9 +105,13 @@ function renderFiles() {
           <span class="tag ${f.type}">${f.type.toUpperCase()}</span>
         </div>
         <div class="file-card-actions">
-          <a href="${f.url}" class="btn btn-primary" target="_blank" rel="noopener">
+          ${!f.download_error ? `<a href="downloads/${encodeURIComponent(f.name)}" class="btn btn-primary" download>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Open
+            Download
+          </a>` : ''}
+          <a href="${f.url}" class="btn ${f.download_error ? 'btn-primary' : 'btn-secondary'}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Source
           </a>
         </div>
       </div>

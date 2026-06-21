@@ -24,19 +24,21 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Fetch and update manifest
+      - name: Fetch and download new files
+        env:
+          PROXY_URL: ${{ secrets.PROXY_URL }}
         run: python scripts/extract.py
 
-      - name: Commit updated manifest
+      - name: Commit new files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add downloaded.json
+          git add downloads/ downloaded.json
           if git diff --cached --quiet; then
             echo "No new files"
           else
             TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
-            git commit -m "chore: update manifest - ${TIMESTAMP}"
+            git commit -m "chore: add new downloads - ${TIMESTAMP}"
             git push
           fi
 
