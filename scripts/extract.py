@@ -22,8 +22,11 @@ def save_manifest(manifest):
     MANIFEST_PATH.write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
+HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; HelpStudentPoint-Extract/1.0)"}
+
+
 def fetch_listing():
-    resp = requests.get(BASE_URL, timeout=30)
+    resp = requests.get(BASE_URL, headers=HEADERS, timeout=30)
     resp.raise_for_status()
     return resp.text
 
@@ -55,7 +58,7 @@ def parse_files(html):
 
 
 def download_file(url, dest):
-    resp = requests.get(url, stream=True, timeout=120)
+    resp = requests.get(url, headers=HEADERS, stream=True, timeout=120)
     resp.raise_for_status()
     with open(dest, "wb") as f:
         for chunk in resp.iter_content(chunk_size=8192):
