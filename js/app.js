@@ -36,16 +36,13 @@ async function loadFiles() {
     allFiles = Object.entries(manifest).map(([name, info]) => ({
       name,
       url: info.url || (SOURCE_BASE + encodeURIComponent(name)),
-      localUrl: 'downloads/' + encodeURIComponent(name),
-      last_modified: info.last_modified || '',
-      size: info.size || '',
-      downloaded_at: info.downloaded_at || '',
+      discovered_at: info.discovered_at || info.downloaded_at || '',
       type: getFileType(name),
     }));
 
     allFiles.sort((a, b) => {
-      if (a.downloaded_at && b.downloaded_at) {
-        return new Date(b.downloaded_at) - new Date(a.downloaded_at);
+      if (a.discovered_at && b.discovered_at) {
+        return new Date(b.discovered_at) - new Date(a.discovered_at);
       }
       return a.name.localeCompare(b.name);
     });
@@ -105,18 +102,11 @@ function renderFiles() {
         <div class="file-card-name">${escapeHtml(f.name)}</div>
         <div class="file-card-meta">
           <span class="tag ${f.type}">${f.type.toUpperCase()}</span>
-          <span class="dot"></span>
-          <span>${f.size}</span>
-          ${f.last_modified ? `<span class="dot"></span><span>${f.last_modified}</span>` : ''}
         </div>
         <div class="file-card-actions">
-          <a href="${f.localUrl}" class="btn btn-primary" download>
+          <a href="${f.url}" class="btn btn-primary" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download
-          </a>
-          <a href="${f.url}" class="btn btn-secondary" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Source
+            Open
           </a>
         </div>
       </div>
