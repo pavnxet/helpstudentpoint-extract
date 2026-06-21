@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HelpStudentPoint — Extracted Downloads</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/liquid-glass.css">
+</head>
+<body>
+
+  <!-- Aurora background + floating blobs -->
+  <div class="aurora"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- Dynamic overlays -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="spotlight" id="spotlight"></div>
+  <button class="fab" id="fab" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+  </button>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="brand">
+        <div class="brand-mark">H</div>
+        <span>HelpStudentPoint</span>
+      </div>
+      <div class="nav-stats">
+        <div class="nav-stat"><strong id="statTotal">0</strong> files</div>
+        <div class="nav-stat"><strong id="statPdfs">0</strong> PDFs</div>
+        <div class="nav-stat"><strong id="statImages">0</strong> images</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero" data-reveal>
+    <span class="hero-eyebrow">Auto-extracted from helpstudentpoint.com</span>
+    <h1>Downloads in <em>warm glass</em><br>and soft amber light.</h1>
+    <p>PDFs and images automatically extracted every 6 hours from the source website. Search, filter, and download directly.</p>
+
+    <div class="search-container">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search files by name...">
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All Files</button>
+      <button class="filter-btn" data-filter="pdf">PDFs</button>
+      <button class="filter-btn" data-filter="image">Images</button>
+    </div>
+  </header>
+
+  <!-- Files -->
+  <section class="section">
+    <div class="file-grid" id="fileGrid">
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Loading files...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>Extracted from <a href="https://file.helpstudentpoint.com/wp-content/uploads/2026/06/" target="_blank" rel="noopener">file.helpstudentpoint.com</a> · Auto-updated every 6 hours</span>
+      <span>Built with Liquid Glass Design System</span>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
