@@ -22,7 +22,11 @@ def save_manifest(manifest):
     MANIFEST_PATH.write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; HelpStudentPoint-Extract/1.0)"}
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+}
 
 
 def fetch_listing():
